@@ -1,0 +1,5 @@
+export const fetchUsers ={
+    SET_ENCONTRADO: "SET_ENCONTRADO",
+    SET_ERROR:"SET_ERROR",
+    SET_NO_ENCONTRADO:"SET_NO_ENCONTRADO",
+}

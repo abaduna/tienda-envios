@@ -1,0 +1,81 @@
+/* .producto-img{
+  width: 100px;
+  height: 100px;
+} */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); 
+  /* Crea tantas columnas de 300px como puedan caber en el ancho de la pantalla */
+  gap: 20px; /* Espacio entre los elementos del grid */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+}
+
+/* Estilos para cada elemento del grid */
+.productos-grid-item {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center; /* Centra el texto dentro de cada item */
+}
+.flex{
+  display: flex;
+  justify-content: center;
+  
+  flex-direction: column;
+}
+.button-carrito{
+  background-color: rgb(1, 1, 1);
+  color: white;
+  padding: 12px;
+  text-decoration: none;
+}
+.button-carrito:hover{
+  background-color: rgb(71, 71, 71);
+  padding: 15px;
+  color: white;
+}
+.Conuter{
+  
+  
+  color: white;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 50%;
+  
+  padding: 10px;
+}
+/* Aplicar el desplazamiento suave al elemento raíz */
+:root {
+  scroll-behavior: smooth;
+}
+
+/* Aplicar el desplazamiento suave a un elemento específico */
+.scroll-container {
+  position: fixed;
+  top: 50px; /* Ajusta la posición superior según tus necesidades */
+  left: 10px;
+  color: rgba(80, 80, 80, 0.495);
+}
+.black {
+  background: black;
+  padding: 10px;
+  color: white;
+}
+.white{
+   color: white !important;
+}
+.anchoDePantalla{
+  width: 100%;
+}
+@media (max-width: 600px) {
+  /* Estilos específicos para dispositivos móviles */
+  .Conuter {
+    color: white;
+  
+    width: 5px;
+    margin: 10px;
+    border-radius: 50%;
+    font-size: 10px; /* Corrige el valor de font-size (debe tener una unidad, por ejemplo, px) */
+  }
+  /* Otros estilos específicos para dispositivos móviles */
+}
