@@ -2,9 +2,10 @@ const express = require(`express`);
 const multer = require("multer");
 const database = require("./../db");
 const fs = require("fs"); // Corrected import statement
+const verifyToken = require("../Middleware/authMiddleware")
 const routerProductos = express.Router();
 //obtener productos
-routerProductos.get("/api/productos", async (req, res) => {
+routerProductos.get("/api/productos" ,async (req, res) => {
   const connection = await database.getConnection();
   try {
     const result = await connection.query("SELECT * FROM productos  ");
@@ -22,7 +23,7 @@ const upload = multer({
 
 //subir un producto
 routerProductos.post(
-  "/api/productos",
+  "/api/productos",verifyToken,
   upload.single("imageUpLoading"),
   async (req, res) => {
     const connection = await database.getConnection();
@@ -55,7 +56,7 @@ function saveImage(file) {
 }
 
 //deletd producto
-routerProductos.delete("/api/productos/:id", async (req, res) => {
+routerProductos.delete("/api/productos/:id",verifyToken, async (req, res) => {
   const connection = await database.getConnection();
   const id = req.params.id;
   try {
@@ -75,7 +76,7 @@ routerProductos.delete("/api/productos/:id", async (req, res) => {
 });
 //hacer una ruta aparte
 //ver por categoria
-routerProductos.get("/api/categoria/:category", async (req, res) => {
+routerProductos.get("/api/categoria/:category",async (req, res) => {
   const connection = await database.getConnection();
   const category = req.params.category;
   try {
@@ -105,7 +106,7 @@ routerProductos.get("/api/categoria", async (req, res) => {
 });
 
 //insertar categorias
-routerProductos.post("/api/categoria", async (req, res) => {
+routerProductos.post("/api/categoria",verifyToken, async (req, res) => {
   const connection = await database.getConnection();
   let { category } = req.body;
   try {
@@ -116,7 +117,7 @@ routerProductos.post("/api/categoria", async (req, res) => {
     res.status(200).json(result);
   } catch (error) {}
 });
-routerProductos.get("/api/producto/:id", async (req, res) => {
+routerProductos.get("/api/producto/:id",verifyToken,async (req, res) => {
   const connection = await database.getConnection();
   const id = req.params.id
   console.log('id', id)
@@ -131,7 +132,7 @@ routerProductos.get("/api/producto/:id", async (req, res) => {
   console.log(error)
   }
 });
-routerProductos.post("/api/producto/:id", async (req, res) => {
+routerProductos.post("/api/producto/:id",verifyToken, async (req, res) => {
   const connection = await database.getConnection();
   const id = req.params.id
   const {title,descripction,category,imagenurl,precio,weight,stck} = req.body

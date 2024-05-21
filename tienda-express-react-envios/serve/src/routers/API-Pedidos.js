@@ -1,9 +1,9 @@
 const express = require(`express`);
 const database = require("./../db");
-
+const verifyToken = require("../Middleware/authMiddleware")
 const routerPedidos = express.Router();
 //obterner pedidos
-routerPedidos.get("/pedidos/entregados", async (req, res) => {
+routerPedidos.get("/pedidos/entregados",verifyToken ,async (req, res) => {
   const connection = await database.getConnection();
   try {
     const result = await connection.query(
@@ -17,7 +17,7 @@ routerPedidos.get("/pedidos/entregados", async (req, res) => {
   }
 });
 //obtener productos
-routerPedidos.get("/pedidos/productList/:id", async (req, res) => {
+routerPedidos.get("/pedidos/productList/:id",verifyToken, async (req, res) => {
   const id_orden = req.params.id;
   const connection = await database.getConnection();
   try {
@@ -33,7 +33,7 @@ routerPedidos.get("/pedidos/productList/:id", async (req, res) => {
   }
 });
 
-routerPedidos.put("/pedidos/ModifyProductList/:id", async (req, res) => {
+routerPedidos.put("/pedidos/ModifyProductList/:id",verifyToken, async (req, res) => {
   const id_orden = req.params.id;
   const { nombre, precio, descripcion } = req.body;
   try {
@@ -48,7 +48,7 @@ routerPedidos.put("/pedidos/ModifyProductList/:id", async (req, res) => {
     res.status(500).json({ error: "Error en la consulta" });
   }
 });
-routerPedidos.put("/pedidos/ModifyProduct/:id", async (req, res) => {
+routerPedidos.put("/pedidos/ModifyProduct/:id",verifyToken, async (req, res) => {
   const id_orden = req.params.id;
   const { nombre, total, descripcion } = req.body;
   try {
@@ -66,7 +66,7 @@ routerPedidos.put("/pedidos/ModifyProduct/:id", async (req, res) => {
 });
 //cambio de estado
 
-routerPedidos.patch("/pedidos/ModifyStatus/:id",async(req,res)=>{
+routerPedidos.patch("/pedidos/ModifyStatus/:id",verifyToken,async(req,res)=>{
   const {estado} = req.body
   const id_orden = req.params.id;
   const connection = await database.getConnection();
@@ -84,7 +84,7 @@ try {
   
 })
 //paneles especificos
-routerPedidos.get("/pedidos/entregados/:estado", async (req, res) => {
+routerPedidos.get("/pedidos/entregados/:estado",verifyToken, async (req, res) => {
   const estado = req.params.estado;
   const connection = await database.getConnection();
   try {

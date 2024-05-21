@@ -5,6 +5,7 @@ const mercadopago = require("mercadopago");
 const fetch = require("node-fetch");
 const uniqid = require("uniqid");
 const crypto = require("crypto");
+const verifyToken = require("../Middleware/authMiddleware")
 const routerVentas = express.Router();
 
 require("dotenv").config();

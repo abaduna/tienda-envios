@@ -7,9 +7,10 @@ routerUsuarios.post("/api/users", async (req, res) => {
   let { username, password } = req.body;
   console.log(req.body);
   const connection = await database.getConnection();
-  const consult = `SELECT * FROM login WHERE username=? and password=? ;`;
+  
 
   try {
+    const consult = `SELECT * FROM login WHERE username=? and password=? ;`;
     const result = await connection.query(consult, [username, password]);
     console.log("try");
     console.log(result.length);
